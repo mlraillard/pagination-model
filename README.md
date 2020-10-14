@@ -1,3 +1,11 @@
+To install pagination-model
+1) npm install
+2) mkdir public/img
+3) cp -R node_modules/react-flags/vendor/flags public/img
+4) yarn start
+
+
+Boilerplate from create-react-app::::::::::::::::::
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
