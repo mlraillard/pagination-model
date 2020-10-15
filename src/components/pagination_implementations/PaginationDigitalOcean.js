@@ -153,7 +153,7 @@ class PaginationDigitalOcean extends Component {
     return (
       <Fragment>
         <nav aria-label="Pagination">
-          <ul className="pagination justify-content-center">
+          <ul className="pagination pagination-sm justify-content-end ppag">
             { pages.map((page, index) => {
 
               if (page === LEFT_PAGE) return (

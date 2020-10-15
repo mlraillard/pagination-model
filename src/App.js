@@ -5,8 +5,8 @@ import Countries from 'countries-api';
 import { SELECTED_MODE } from './constants/modes'
 import TraversyPosts from './components/ex_traversy/TraversyPosts';
 import StaticSeocsPosts from './components/ex_staticSeocs/StaticSeocsPosts';
+import BillingCodesPosts from './components/ex_billingCodes/BillingCodesPosts';
 import CurrentPosts from './components/ex_digitalOcean/CurrentPosts';
-//import PaginationTrav from './components/pagination_implementations/PaginationTrav';
 import PaginationDigitalOcean from './components/pagination_implementations/PaginationDigitalOcean';
 import { staticSeocData } from './components/ex_staticSeocs/utils/staticSeocs';
 import './css/App.css';
@@ -27,6 +27,13 @@ const App = () => {
   const traversyFetchPosts = async () => {
     setLoading(true);
     const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    setPosts(res.data);
+    setLoading(false);
+  };
+
+  const billingCodesFetchPosts = async () => {
+    setLoading(true);
+    const res = await axios.get('http://localhost:8080/v1/lookup/billingcode');
     setPosts(res.data);
     setLoading(false);
   };
@@ -52,6 +59,9 @@ const App = () => {
   useEffect(() => {
     if (mode === 'TRAVERSY') {
       traversyFetchPosts();
+    }
+    else if (mode === 'BILLINGCODES') {
+      billingCodesFetchPosts();
     }
     else if (mode === 'STATICSEOCS') {
       staticSeocsFetchPosts();
@@ -81,36 +91,41 @@ const App = () => {
     <div className='container mt-5'>
       <select className="selectpicker" value={mode} onChange={event => handleModeChange(event.target.value)} >
          <option key="z20" id="0" value="TRAVERSY">TypiCode</option>
-         <option key="z21" id="1" value="STATICSEOCS">Static Seocs</option>
-         <option key="z22" id="2" value="FLAGS">Flags</option>
+         <option key="z21" id="1" value="BILLINGCODES">Billings Codes</option>
+         <option key="z22" id="2" value="STATICSEOCS">Static Seocs</option>
+         <option key="z23" id="3" value="FLAGS">Flags</option>
       </select>
 
-      <div className="d-flex flex-row align-items-center">
-        <h3 tabIndex="0">
-          <strong className="text-secondary">{posts.length}</strong> Items
-        </h3>
-        { currentPage && (
-          <span role="alert" className="current-page d-inline-block h-100 pl-4 text-secondary">
-            Page <span className="font-weight-bold">{ currentPage }</span> of <span className="font-weight-bold">{ totalPages }</span>
-          </span>
-        ) }
+      <div className='prows pheader '>
+        <div className='prow'>
+          { currentPage && (
+            <div className="psummary">
+              <span tabIndex="0"><strong>{posts.length} Items</strong></span>
+              <span className="prow">&nbsp;&nbsp;&nbsp;</span>
+              <span tabIndex="0">Page { currentPage } of { totalPages }</span>
+              <span role="alert" style={{backgoundColor: '#fff', color: '#fff'}}>Page { currentPage } of { totalPages }</span>
+            </div>
+          ) }
+        </div>
+        <div className='prow'>
+          <PaginationDigitalOcean
+            postsPerPage={9}
+            totalPosts={posts.length}
+            pageNeighbours={0}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
+        </div>
       </div>
 
       <div className='pagination-table-window'>
       { mode === 'TRAVERSY' ? <TraversyPosts posts={currentPosts} loading={loading} /> :
         mode === 'STATICSEOCS' ? <StaticSeocsPosts posts={currentPosts} loading={loading} /> :
         mode === 'FLAGS' ? <CurrentPosts currentPosts={currentPosts} /> :
+        mode === 'BILLINGCODES' ? <BillingCodesPosts posts={currentPosts} /> :
         '' 
       }
       </div>
-
-       <PaginationDigitalOcean
-        postsPerPage={9}
-        totalPosts={posts.length}
-        pageNeighbours={0}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
     </div>
   );
 };
