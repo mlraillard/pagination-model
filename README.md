@@ -1,11 +1,29 @@
-To install pagination-model
+Install the pagination-model (in-progress!)
+(There are four data sets. You can optionally skip SEOC billing codes setup.)
+
 1) npm install
-2) mkdir public/img
-3) cp -R node_modules/react-flags/vendor/flags public/img
+
+2) To view country flags data:
+2a) mkdir public/img
+2b) cp -R node_modules/react-flags/vendor/flags public/img
+
+3) To view SEOC billing codes endpoint:
+3a) In SEOCAPI main/java...util/Constants.java, add 'externalUrls.add("/v1/lookup/billingcode");' to the end of the 'static' block.
+3b) npm run build:api
+3c) Stop local proxy container service
+3d) The endpoint http://localhost:8080/v1/lookup/billingcode should be available
+3e) If there is a CORS policy block, run this from terminal:
+open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security
+
 4) yarn start
 
 
-Boilerplate from create-react-app::::::::::::::::::
+
+Below is the create-react-app boilerplate.
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

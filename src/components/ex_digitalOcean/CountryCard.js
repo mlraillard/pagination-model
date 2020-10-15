@@ -21,16 +21,16 @@ const CountryCard = props => {
     </div> */
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-        <div className="h-100 position-relative border-gray border-right px-2 bg-white rounded-left">
-          <Flag country={code2} format="png" pngSize={32} basePath="./img/flags" className="d-block h-100" />
+    <div class="col-sm-3">
+        <div className="h-100 position-relative px-2 bg-white rounded-left">
+          <Flag country={code2} format="png" pngSize={64} basePath="./img/flags" className="d-block h-100" />
         </div>
     </div>
-    <div class="col-sm">
-        <span className="country-name text-dark d-block font-weight-bold">{ name.common }</span>
+    <div class="col-sm-3" style={{paddingTop: "20px"}}>
+        <span className="country-name text-dark d-block">{ name.common }</span>
     </div>
-    <div class="col-sm">
-        <span className="country-region text-secondary text-uppercase">{ region }</span>
+    <div class="col-sm-3" style={{paddingTop: "20px"}}>
+        <span className="country-name">{ region }</span>
     </div>
   </div>
 </div>
