@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { CONTROL_BUTTONS_AS_ICONS, CONTROL_BUTTON_LEFT, CONTROL_BUTTON_RIGHT } from '../../constants/pagination';
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -36,7 +37,7 @@ class PaginationDigitalOcean extends Component {
     const f_totalPosts = typeof this.props.totalPosts === 'number' ? this.props.totalPosts : 0;
     const f_totalPages = Math.ceil(f_totalPosts / this.props.postsPerPage);
 
-    const { paginate = f => f } = this.props; // what does this do???
+    const { paginate = f => f } = this.props; // extract a 'paginate' prop from props - clever
     const f_currentPage = Math.max(0, Math.min(page, f_totalPosts));
     const paginationData = {
       d_currentPage: f_currentPage,
@@ -146,19 +147,20 @@ class PaginationDigitalOcean extends Component {
         return null;
     }
 
-    const { currentPage } = this.state;
+    const { currentPage } = this.props.currentPage ===1 && this.state.currentPage !== 1 ? 1 : this.state;
     const pages = this.fetchPageNumbers();
 
     return (
       <Fragment>
         <nav aria-label="Pagination">
-          <ul className="pagination">
+          <ul className="pagination justify-content-center">
             { pages.map((page, index) => {
 
               if (page === LEFT_PAGE) return (
                 <li id={`page${index}`} key={index} className="page-item">
                   <a className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
-                    <span aria-hidden="true">&laquo;</span>
+                    {/* <span aria-hidden="true">{CONTROL_BUTTONS_AS_ICONS ? `&laquo;` : 'Previous'}</span> */}
+                    <span aria-hidden="true">{CONTROL_BUTTONS_AS_ICONS ? String.fromCharCode(171) : CONTROL_BUTTON_LEFT }</span>
                     <span className="sr-only">Previous</span>
                   </a>
                 </li>
@@ -167,7 +169,8 @@ class PaginationDigitalOcean extends Component {
               if (page === RIGHT_PAGE) return (
                 <li id={`page${index}`} key={index} className="page-item">
                   <a className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
-                    <span aria-hidden="true">&raquo;</span>
+                    {/* <span aria-hidden="true">{CONTROL_BUTTONS_AS_ICONS ? &raquo; : 'Next'}</span> */}
+                    <span aria-hidden="true">{CONTROL_BUTTONS_AS_ICONS ? String.fromCharCode(187) : CONTROL_BUTTON_RIGHT }</span>
                     <span className="sr-only">Next</span>
                   </a>
                 </li>
@@ -201,6 +204,7 @@ PaginationDigitalOcean.propTypes = {
   postsPerPage: PropTypes.number,
   pageNeighbours: PropTypes.number,
   paginate: PropTypes.func,
+  currentPage: PropTypes.number,
 };
 
 export default PaginationDigitalOcean;
