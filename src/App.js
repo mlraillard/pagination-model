@@ -21,7 +21,7 @@ const App = () => {
   let [currentPage, setCurrentPage] = useState(1);
   let [offset, setOffset] = useState(0);
   let [currentPosts, setCurrentPosts] = useState([]);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   let [totalPages, setTotalPages] = useState(0);
 
   const traversyFetchPosts = async () => {
@@ -86,26 +86,30 @@ const App = () => {
       </select>
 
       <div className="d-flex flex-row align-items-center">
-        <h3 >
+        <h3 tabIndex="0">
           <strong className="text-secondary">{posts.length}</strong> Items
         </h3>
         { currentPage && (
-          <span className="current-page d-inline-block h-100 pl-4 text-secondary">
-            Page <span className="font-weight-bold">{ currentPage }</span> / <span className="font-weight-bold">{ totalPages }</span>
+          <span role="alert" className="current-page d-inline-block h-100 pl-4 text-secondary">
+            Page <span className="font-weight-bold">{ currentPage }</span> of <span className="font-weight-bold">{ totalPages }</span>
           </span>
         ) }
       </div>
 
+      <div className='pagination-table-window'>
       { mode === 'TRAVERSY' ? <TraversyPosts posts={currentPosts} loading={loading} /> :
         mode === 'STATICSEOCS' ? <StaticSeocsPosts posts={currentPosts} loading={loading} /> :
         mode === 'FLAGS' ? <CurrentPosts currentPosts={currentPosts} /> :
         '' 
       }
+      </div>
+
        <PaginationDigitalOcean
-        postsPerPage={10} 
+        postsPerPage={9}
         totalPosts={posts.length}
-        pageNeighbours={2}
+        pageNeighbours={0}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );
