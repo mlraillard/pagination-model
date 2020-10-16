@@ -14,6 +14,7 @@ Install the pagination-model (in-progress!)
 3d) The endpoint http://localhost:8080/v1/lookup/billingcode should be available. 
 3e) If there is a CORS policy block, run this from terminal: 
 open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security
+3f) Thanks Lilly!
 
 4) yarn start
 
