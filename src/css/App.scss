@@ -51,45 +51,9 @@ $light-background: lighten(desaturate($base-color, 50%), 12.5%);
   padding-right: 20px;
 }
 
-
-//$colors: (
- // "blue": $blue,
-
-/* $colors: (
-  "blue": red
-); */
-
+// Override some Bootstrap pagination styles
 $theme-colors: (
   primary: #005ea2
 );
-
-// Override some Bootstrap pagination styles
-/* ul.pagination {
-  margin-top: 0;
-  margin-bottom: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
-
-  li.page-item.active {
-    a.page-link {
-      color: #fff;
-      background-color: #005ea2;
-      border-color: $base-color !important;
-    }
-  }
-
-  a.page-link {
-    padding: 0.75rem 1rem;
-    text-align: center;
-    box-shadow: none !important;
-    border-color: $base-color !important;
-    color: saturate(darken($base-color, 30%), 10%);
-    font-weight: 900;
-    font-size: 1rem;
-
-    &:hover {
-      background-color: $light-background;
-    }
-  }
-} */
 
 @import "~bootstrap/scss/bootstrap";

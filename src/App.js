@@ -7,7 +7,7 @@ import TraversyPosts from './components/ex_traversy/TraversyPosts';
 import StaticSeocsPosts from './components/ex_staticSeocs/StaticSeocsPosts';
 import BillingCodesPosts from './components/ex_billingCodes/BillingCodesPosts';
 import CurrentPosts from './components/ex_digitalOcean/CurrentPosts';
-import PaginationDigitalOcean from './components/pagination_implementations/PaginationDigitalOcean';
+import PaginationFiveButton from './components/pagination_implementations/PaginationFiveButton';
 import { staticSeocData } from './components/ex_staticSeocs/utils/staticSeocs';
 import './css/App.css';
 
@@ -108,10 +108,9 @@ const App = () => {
           ) }
         </div>
         <div className='prow'>
-          <PaginationDigitalOcean
+          <PaginationFiveButton
             postsPerPage={9}
             totalPosts={posts.length}
-            pageNeighbours={0}
             paginate={paginate}
             currentPage={currentPage}
           />
