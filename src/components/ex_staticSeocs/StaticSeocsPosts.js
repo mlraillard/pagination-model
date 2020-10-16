@@ -5,8 +5,9 @@ const StaticSeocsPosts = ({ posts, loading }) => {
         return <h2>loading....</h2>;
     }
     return (
-        <div class='container'>
-        <table class='table table-striped'>
+        <div className='container'>
+        <table className='table table-striped'>
+            <tbody>
             <tr>
                 <th>Service Line</th>
                 <th>SEOC</th>
@@ -14,7 +15,6 @@ const StaticSeocsPosts = ({ posts, loading }) => {
                 <th>Effective</th>
                 <th>End Date</th>
             </tr>
-            <tbody>
             {posts.map(post => (
                 <tr key={[post.id]}>
                     <td className=''>{post.serviceLine}</td>

@@ -1,5 +1,18 @@
 import { LEFT_PAGE, RIGHT_PAGE } from '../../../constants/pagination';
 
+export const getButtonAriaLabels = (currentPage, pages) => {
+    const statements = {
+      0: currentPage === pages[0] ? `Go to Page ${pages[0]}, Current Page` : `Go to Page ${pages[0]}`,
+      1: pages[1] === LEFT_PAGE ? `Previous to Page ${pages[2] - 1}` :
+         currentPage === pages[1] ? `Go to Page ${pages[1]}, Current Page` : `Go to Page ${pages[1]}`,
+      2: currentPage === pages[2] ? `Go to Page ${pages[2]}, Current Page` : `Go to Page ${pages[2]}`,
+      3: pages[3] === RIGHT_PAGE ? `Next to Page ${pages[2] + 1}` :
+         currentPage === pages[3] ? `Go to Page ${pages[3]}, Current Page` : `Go to Page ${pages[3]}`,
+      4: currentPage === pages[4] ? `Go to Page ${pages[4]}, Current Page` : `Go to Page ${pages[4]}`,
+    };
+    return statements;
+}
+
 const range = (from, to) => {
   let i = from;
   const range = [];
