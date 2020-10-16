@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Countries from 'countries-api';
 
-import { SELECTED_MODE } from './constants/modes'
+import { SELECTED_MODE } from './constants/modes';
+import { DEFAULT_POSTS_PER_PAGE } from './constants/pagination';
 import TraversyPosts from './components/ex_traversy/TraversyPosts';
 import StaticSeocsPosts from './components/ex_staticSeocs/StaticSeocsPosts';
 import BillingCodesPosts from './components/ex_billingCodes/BillingCodesPosts';
@@ -21,7 +22,7 @@ const App = () => {
   let [currentPage, setCurrentPage] = useState(1);
   let [offset, setOffset] = useState(0);
   let [currentPosts, setCurrentPosts] = useState([]);
-  const [postsPerPage, setPostsPerPage] = useState(9);
+  const [postsPerPage] = useState( DEFAULT_POSTS_PER_PAGE );
   let [totalPages, setTotalPages] = useState(0);
 
   const traversyFetchPosts = async () => {
@@ -102,14 +103,13 @@ const App = () => {
             <div className="psummary">
               <span tabIndex="0"><strong>{posts.length} Items</strong></span>
               <span className="prow">&nbsp;&nbsp;&nbsp;</span>
-              <span tabIndex="0">Page { currentPage } of { totalPages }</span>
-              <span role="alert" style={{backgoundColor: '#fff', color: '#fff'}}>Page { currentPage } of { totalPages }</span>
+              <span role="alert" tabIndex="0">Page { currentPage } of { totalPages }</span>
             </div>
           ) }
         </div>
         <div className='prow'>
           <PaginationFiveButton
-            postsPerPage={9}
+            postsPerPage={ DEFAULT_POSTS_PER_PAGE }
             totalPosts={posts.length}
             paginate={paginate}
             currentPage={currentPage}
